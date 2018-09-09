@@ -1,0 +1,16 @@
+import java.util.Scanner;
+
+public class LabWork
+{
+	public static void main(String [] args)
+	{
+		Scanner input=new Scanner(System.in);
+		int a = input.nextInt();
+		//int b =input.nextInt();
+		if(a>0)System.out.println("The number is positive");
+		else if(a<0) System.out.println("The number is negative");
+		else System.out.println("The number is zero");
+		//int sum = a+b;
+		//System.out.println("The sum is: "+sum);
+	}
+}

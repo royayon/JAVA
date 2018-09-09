@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="InfoPrint+:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/InfoPrint__jar</output-path>
+    <root id="archive" name="InfoPrint+.jar">
+      <element id="module-output" name="InfoPrint+" />
+    </root>
+  </artifact>
+</component>

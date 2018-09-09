@@ -1,0 +1,116 @@
+package package1;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import java.awt.Window.Type;
+import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
+import java.awt.BorderLayout;
+import javax.swing.JButton;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseMotionAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseAdapter;
+
+public class AyZenHUB {
+
+	private JFrame frame;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					AyZenHUB window = new AyZenHUB();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	int xMouse;
+	int yMouse;
+	public AyZenHUB() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	void setSystemLook() {
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedLookAndFeelException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private void initialize() {
+		setSystemLook();
+		frame = new JFrame();
+		frame.getContentPane().setBackground(Color.LIGHT_GRAY);
+		frame.getContentPane().setForeground(Color.RED);
+		frame.setBounds(100, 100, 678, 513);
+		frame.setUndecorated(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				xMouse = arg0.getX();
+				yMouse = arg0.getY();
+			}
+		});
+		panel.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseDragged(MouseEvent arg0) {
+				int x = arg0.getXOnScreen();
+				int y = arg0.getYOnScreen();
+				frame.setLocation(x-xMouse, y-yMouse);
+			}
+		});
+		panel.setBounds(0, 0, 678, 75);
+		frame.getContentPane().add(panel);
+		panel.setLayout(null);
+		
+		JButton btnClose = new JButton("Close");
+		btnClose.setBackground(new Color(0, 140, 186));
+		btnClose.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frame.dispose();
+			}
+		});
+		btnClose.setFont(new Font("SansSerif", Font.PLAIN, 13));
+		btnClose.setForeground(Color.WHITE);
+		btnClose.setBorderPainted(false);
+		btnClose.setContentAreaFilled(false);
+		btnClose.setOpaque(true);
+		btnClose.setBounds(583, 11, 85, 23);
+		panel.add(btnClose);
+	}
+}

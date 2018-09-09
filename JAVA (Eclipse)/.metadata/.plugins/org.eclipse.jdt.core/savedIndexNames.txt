@@ -1,0 +1,1 @@
+INDEX VERSION 1.131+F:\Programming\JAVA\JAVA (Eclipse)\.metadata\.plugins\org.eclipse.jdt.core

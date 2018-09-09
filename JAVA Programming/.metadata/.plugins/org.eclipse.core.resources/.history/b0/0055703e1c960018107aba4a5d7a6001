@@ -1,0 +1,102 @@
+package BFS;
+
+/*
+BFS
+*/
+import java.util.LinkedList;
+import java.util.Scanner;
+
+public class Graph {
+
+int V;
+LinkedList<Integer> []adjList;
+
+Graph(int v) {
+   V = v;
+
+   adjList = new LinkedList[V];
+
+   for (int i = 0; i < V; i++)
+	adjList[i] = new LinkedList<>();
+}
+
+void addEdge(int v1, int v2) {
+   adjList[v1].add(v2);
+   adjList[v2].add(v1);
+}
+
+void BFS(int s) {
+   int color[] = new int[V];
+   int d[] = new int[V];
+   int pi[] = new int[V];
+
+   int WHITE = 0;
+   int GRAY = 1;
+   int BLACK = 2;
+
+   for (int u = 0; u < V; u++) {
+       if (u == s) {
+           continue;
+       }
+       color[u] = WHITE;
+       d[u] = -1;
+       pi[u] = -1;
+   }
+
+   color[s] = GRAY;
+   d[s] = 0;
+   pi[s] = -1;
+
+   LinkedList<Integer> Q = new LinkedList<>();
+   Q.add(s);
+
+   //System.out.println("BFS : ");
+   while (!Q.isEmpty()) {
+       int u = Q.poll();
+       //System.out.print(u + " ");
+       for (int v : adjList[u]) {
+           if (color[v] == WHITE) {
+               color[v] = GRAY;
+               d[v] = d[u] + 1;
+               pi[v] = u;
+               Q.add(v);
+           }
+       }
+       color[u] = BLACK;
+   }
+   
+   for(int i = 0; i<V; i++) {
+	   if(i != s) {
+		   if(d[i] != -1)
+			   System.out.print(d[i]*6 + " ");
+		   else
+			   System.out.print(-1 + " ");
+	   }
+   }
+   
+}
+
+public static void main(String[] args) {
+	Scanner sc = new Scanner(System.in);
+	int q = sc.nextInt();
+	while(q != 0) {
+		int n = sc.nextInt();
+		int m = sc.nextInt();
+		Graph g = new Graph(n);
+		for(int i=0; i<m; i++) {
+			int u = sc.nextInt();
+			int v = sc.nextInt();
+			
+				
+			g.addEdge(u-1 , v-1);
+			
+		}
+		int s = sc.nextInt();
+		g.BFS(s-1);
+		
+		q--;
+	}
+   
+}
+}
+
